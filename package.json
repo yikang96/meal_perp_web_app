@@ -1,0 +1,16 @@
+{
+  "name": "Sage Cuisine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass:build": "sass --no-source-map src/main/resources/static/scss:src/main/resources/static/css",
+    "sass:watch": "sass --no-source-map --watch src/main/resources/static/scss:src/main/resources/static/css"
+  },
+  "author": "Yixin Kang",
+  "license": "MIT",
+  "devDependencies": {
+    "bootstrap": "^5.2.3",
+    "sass": "^1.62.0"
+  }
+}

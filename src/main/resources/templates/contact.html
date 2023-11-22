@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      th:href="@{https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap}"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css}"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/css/bootstrap.css}"
+      href="../static/css/bootstrap.css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/css/styles.css}"
+      href="../static/css/styles.css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/images/favicon.png}"
+      href="../static/images/favicon.png"
+      rel="icon"
+    />
+    <title>Contact</title>
+  </head>
+  <body class="contact-page">
+    <!-- nav bar -->
+    <nav th:replace="~{fragments :: nav-bar}"></nav>
+
+    <!-- Header -->
+    <header class="bg-light py-6">
+      <div class="container">
+        <h1>Contact Us</h1>
+      </div>
+    </header>
+
+    <!-- Image -->
+    <section>
+      <div>
+        <img
+          src="../static/images/contact-us-large.jpg"
+          th:src="@{images/contact-us-large.jpg}"
+          alt=""
+          class="w-100 my-6"
+          id="backgroundImg"
+        />
+      </div>
+    </section>
+
+    <!-- find us on map -->
+    <section class="pt-4">
+      <div class="find-us">
+        <div class="container">
+          <div class="row mb-7">
+            <div class="col-md-12">
+              <div class="section-heading mb-5 border-bottom">
+                <h2>Our Location on Maps</h2>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div id="map">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d145597.39406798387!2d-122.00931732999445!3d37.721443741869926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1697769883615!5m2!1sen!2sus"
+                  width="100%"
+                  height="330px"
+                  frameborder="0"
+                  allowfullscreen=""
+                  title="locationOnMap"
+                  id="locationOnMap"
+                ></iframe>
+              </div>
+            </div>
+            <div class="col-md-4 mb-5">
+              <div class="left-content">
+                <h4>About our office</h4>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisic elit. Sed
+                  voluptate nihil eumester consectetur similiqu consectetur.<br /><br />Lorem
+                  ipsum dolor sit amet, consectetur adipisic elit. Et,
+                  consequuntur, modi mollitia corporis ipsa voluptate corrupti.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact form -->
+    <section class="my-4">
+      <div class="container">
+        <div class="send-message">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="section-heading mb-5 border-bottom">
+                  <h2>Send us a Message</h2>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="contact-form">
+                  <form
+                    class="report-issue"
+                    id="contact"
+                    action=""
+                    method="post"
+                  >
+                    <div class="row">
+                      <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+                        <div class="issue-report-dropdown btn-group">
+                          <button
+                            type="button"
+                            class="btn btn-primary dropdown-toggle col-lg-12 my-4"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            Feedback/Issues
+                          </button>
+                          <ul class="dropdown-menu col-lg-7 my-4">
+                            <li>
+                              <a class="dropdown-item" href="#">Delivery</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" href="#">Refund</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" href="#">Payment</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" href="#">Other Issues</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" href="#"
+                                >General Feedback</a
+                              >
+                            </li>
+                          </ul>
+                        </div>
+
+                        <fieldset>
+                          <input
+                            name="name"
+                            type="text"
+                            class="form-control"
+                            id="name"
+                            placeholder="Full Name"
+                            required
+                          />
+                        </fieldset>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+                        <fieldset>
+                          <input
+                            name="email"
+                            type="email"
+                            pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+                            class="form-control"
+                            id="email"
+                            placeholder="E-Mail Address"
+                            required
+                          />
+                        </fieldset>
+                      </div>
+                      <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+                        <fieldset>
+                          <input
+                            name="subject"
+                            type="text"
+                            class="form-control"
+                            id="subject"
+                            placeholder="Subject"
+                            required
+                          />
+                        </fieldset>
+                      </div>
+                      <div class="col-lg-12">
+                        <fieldset>
+                          <textarea
+                            name="message"
+                            rows="6"
+                            class="form-control"
+                            id="message"
+                            placeholder="Your Message"
+                            minlength="10"
+                            maxlength="250"
+                            required
+                          ></textarea>
+                        </fieldset>
+                      </div>
+                      <div class="col-lg-12 mt-4">
+                        <fieldset>
+                          <label for="formFileMultiple" class="form-label"
+                            >Please submit files that you would like us to
+                            review.</label
+                          >
+                          <input
+                            class="form-control"
+                            type="file"
+                            id="formFileMultiple"
+                            accept=".txt, .jpg, .jpeg, .png, .gif, .mp4, .avi, .mov"
+                            multiple
+                          />
+                        </fieldset>
+                      </div>
+                      <div class="col-lg-12">
+                        <fieldset>
+                          <button
+                            type="submit"
+                            id="form-submit"
+                            class="btn btn-primary btn-lg m-2 my-5"
+                          >
+                            Send Message
+                          </button>
+                        </fieldset>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="container">
+                  <img
+                    class="img-fluid"
+                    src="../static/images/contact-us-form-img.jpg"
+                    th:src="@{images/contact-us-form-img.jpg}"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer th:replace="fragments :: title"></footer>
+
+    <button id="to-top" class="to-top-btn">
+      <img
+        src="../static/images/up-arrow.png"
+        th:src="@{images/up-arrow.png}"
+        alt=""
+      />
+    </button>
+
+    <script
+      th:src="@{/js/bootstrap.bundle.min.js}"
+      src="../static/js/bootstrap.bundle.min.js"
+    ></script>
+    <script th:src="@{/js/script.js}" src="../static/js/script.js"></script>
+  </body>
+</html>

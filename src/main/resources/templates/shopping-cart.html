@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      th:href="@{https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap}"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css}"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/css/bootstrap.css}"
+      href="../static/css/bootstrap.css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/css/styles.css}"
+      href="../static/css/styles.css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/images/favicon.png}"
+      href="../static/images/favicon.png"
+      rel="icon"
+    />
+    <title>Shopping Cart</title>
+  </head>
+  <body class="shopping-cart-page">
+    <!-- nav bar -->
+    <nav th:replace="~{fragments :: nav-bar}"></nav>
+
+    <div class="container my-7">
+      <h1 class="fw-bold">Shopping Cart</h1>
+      <div class="shopping-cart row">
+        <div class="col-md-12 col-lg-9">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                class="product cart-item"
+                th:each="cartItem : ${myCart}"
+                th:data-id="${cartItem.key.id}"
+              >
+                <td class="d-flex">
+                  <div class="product-image">
+                    <img
+                      class="img-fluid"
+                      th:src="${cartItem.key.photo}"
+                      alt=""
+                    />
+                  </div>
+                  <div
+                    class="product-details text-center ms-3 d-flex align-content-center"
+                  >
+                    <p class="product-title" th:text="${cartItem.key.name}"></p>
+                  </div>
+                </td>
+
+                <td class="product-price" th:text="${cartItem.key.price}"></td>
+                <td>
+                  <input
+                    id="meal-quantity"
+                    type="number"
+                    min="1"
+                    placeholder="Q"
+                    th:value="${myCart[cartItem.key]}"
+                    class="form-control update-product-quantity"
+                  />
+                </td>
+                <td
+                  class="product-total"
+                  th:text="${cartItem.key.price * myCart[cartItem.key]}"
+                ></td>
+                <td>
+                  <form action="">
+                    <button
+                      type="submit"
+                      class="remove-product-from-cart btn btn-danger"
+                    >
+                      Remove
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-12 col-lg-3 bg-light p-4 border-top">
+          <div class="summary">
+            <h3 class="text-center">Summary</h3>
+            <div
+              class="summary-item d-flex justify-content-between border-bottom"
+            >
+              <span class="text">Subtotal</span>
+              <span class="subtotal-price" th:text="'$' + ${subtotal}"></span>
+            </div>
+
+            <div class="d-grid gap-2 mt-3">
+              <button type="button" class="btn btn-secondary">Checkout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <footer th:replace="~{fragments :: footer}"></footer>
+
+    <button id="to-top" class="to-top-btn">
+      <img
+        src="../static/images/up-arrow.png"
+        th:src="@{images/up-arrow.png}"
+        alt=""
+      />
+    </button>
+
+    <script
+      th:src="@{/js/bootstrap.bundle.min.js}"
+      src="../static/js/bootstrap.bundle.min.js"
+    ></script>
+    <script th:src="@{/js/script.js}" src="../static/js/script.js"></script>
+  </body>
+</html>

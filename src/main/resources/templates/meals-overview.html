@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      th:href="@{https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap}"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css}"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/css/bootstrap.css}"
+      href="../static/css/bootstrap.css"
+      rel="stylesheet"
+    />
+
+    <link
+      th:href="@{/css/styles.css}"
+      href="../static/css/styles.css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/images/favicon.png}"
+      href="../static/images/favicon.png"
+      rel="icon"
+    />
+    <title>Meals Overview</title>
+  </head>
+  <body class="meals-overview-page">
+    <!-- nav bar -->
+    <nav th:replace="~{fragments :: nav-bar}"></nav>
+
+    <div class="mb-6 header">
+      <div class="row justify-content-md-center">
+        <div class="col-12">
+          <h1 class="text-center py-6">More Meals Coming Soon!</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters for displaying meals of the corresponding category -->
+    <div class="menu-filter">
+      <div
+        class="d-grid gap-3 d-sm-flex justify-content-sm-center my-6 filter-meal-tag"
+      >
+        <form action="#" th:action="@{/meals-overview}" method="get">
+          <button
+            type="submit"
+            class="btn btn-secondary"
+            name="filter"
+            value=""
+          >
+            All Meals
+          </button>
+        </form>
+        <form action="#" th:action="@{/meals-overview}" method="get">
+          <button
+            type="submit"
+            class="btn btn-secondary"
+            name="filter"
+            value="Vegan"
+          >
+            Vegan
+          </button>
+        </form>
+        <form action="#" th:action="@{/meals-overview}" method="get">
+          <button
+            type="submit"
+            class="btn btn-secondary"
+            name="filter"
+            value="Paleo"
+          >
+            Paleo
+          </button>
+        </form>
+        <form action="#" th:action="@{/meals-overview}" method="get">
+          <button
+            type="submit"
+            class="btn btn-secondary"
+            name="filter"
+            value="Keto"
+          >
+            Keto
+          </button>
+        </form>
+        <form action="#" th:action="@{/meals-overview}" method="get">
+          <button
+            type="submit"
+            class="btn btn-secondary"
+            name="filter"
+            value="Mediterranean"
+          >
+            Mediterranean
+          </button>
+        </form>
+        <form action="#" th:action="@{/meals-overview}" method="get">
+          <button
+            type="submit"
+            class="btn btn-secondary"
+            name="filter"
+            value="Japanese"
+          >
+            Japanese
+          </button>
+        </form>
+        <form action="#" th:action="@{/meals-overview}" method="get">
+          <button
+            type="submit"
+            class="btn btn-secondary"
+            name="filter"
+            value="Chinese"
+          >
+            Chinese
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add Meals -->
+    <div
+      class="container mb-3"
+      th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"
+    >
+      <i
+        class="fa-solid fa-plus me-4"
+        data-bs-toggle="modal"
+        data-bs-target="#addMeal"
+        type="button"
+        ><span class="ms-2 font-monospace fw-semibold">Add More Meals</span></i
+      >
+      <!-- Modal Form for adding meals -->
+      <div
+        class="modal fade"
+        id="addMeal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title w-100 text-center">Add More Meal</h4>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+              <form
+                action="#"
+                id="addMealForm"
+                method="post"
+                th:action="@{/add-meal}"
+                th:object="${mealDTO}"
+                enctype="utf8"
+              >
+                <div class="container">
+                  <!-- display errors on top of the form -->
+                  <div id="errorMessage-error"></div>
+                  <!-- <div
+                    th:if="${errorMessage}"
+                    class="alert alert-danger"
+                    role="alert"
+                  >
+                    <p th:text="${errorMessage}"></p>
+                  </div> -->
+                  <div class="form-group row my-3">
+                    <div id="name-error"></div>
+
+                    <label for="meal-name" class="col-sm-2 col-form-label"
+                      >Name</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="meal-name"
+                        name="name"
+                        placeholder="Meal Name"
+                        required
+                        th:field="*{name}"
+                      />
+                    </div>
+                    <span
+                      th:if="${#fields.hasErrors('name')}"
+                      class="alert alert-error"
+                      th:errors="*{name}"
+                    ></span>
+                  </div>
+
+                  <div class="form-group row my-3">
+                    <div id="photo-error"></div>
+
+                    <label for="meal-photo" class="col-sm-2 col-form-label"
+                      >Photo</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="meal-photo"
+                        name="meal-photo"
+                        placeholder="Photo /path"
+                        required
+                        th:field="*{photo}"
+                      /><span
+                        th:if="${#fields.hasErrors('photo')}"
+                        class="alert alert-error"
+                        th:errors="*{photo}"
+                      ></span>
+                    </div>
+                  </div>
+
+                  <div class="form-group row my-3">
+                    <div id="price-error"></div>
+
+                    <label for="meal-price" class="col-sm-2 col-form-label"
+                      >Price</label
+                    >
+                    <div class="col-sm-10">
+                      <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="meal-price"
+                          name="meal-price"
+                          placeholder="price"
+                          required
+                          th:field="*{price}"
+                        /><span
+                          th:if="${#fields.hasErrors('price')}"
+                          class="alert alert-error"
+                          th:errors="*{price}"
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row my-3">
+                    <div id="category-error"></div>
+                    <label class="col-sm-2 col-form-label" name="category"
+                      >Category</label
+                    >
+
+                    <div class="col-sm-10" name="meal-tags">
+                      <div class="form-check form-check-inline">
+                        <input
+                          type="checkbox"
+                          class="form-control form-check-input"
+                          id="vegan"
+                          name="category"
+                          value="Vegan"
+                          th:field="*{category}"
+                        />
+                        <label class="form-check-label" for="vegan"
+                          >Vegan</label
+                        >
+                      </div>
+
+                      <div class="form-check form-check-inline">
+                        <input
+                          type="checkbox"
+                          class="form-control form-check-input"
+                          id="paleo"
+                          name="category"
+                          value="Paleo"
+                          th:field="*{category}"
+                        />
+                        <label class="form-check-label" for="paleo"
+                          >Paleo</label
+                        >
+                      </div>
+
+                      <div class="form-check form-check-inline">
+                        <input
+                          type="checkbox"
+                          class="form-control form-check-input"
+                          id="keto"
+                          name="category"
+                          value="Keto"
+                          th:field="*{category}"
+                        />
+                        <label class="form-check-label" for="keto">Keto</label>
+                      </div>
+
+                      <div class="form-check form-check-inline">
+                        <input
+                          type="checkbox"
+                          class="form-control form-check-input"
+                          id="japanese-meal"
+                          name="category"
+                          value="Japanese"
+                          th:field="*{category}"
+                        />
+                        <label class="form-check-label" for="japanese-meal"
+                          >Japanese</label
+                        >
+                      </div>
+
+                      <div class="form-check form-check-inline">
+                        <input
+                          type="checkbox"
+                          class="form-control form-check-input"
+                          id="chinese-meal"
+                          name="category"
+                          value="Chinese"
+                          th:field="*{category}"
+                        />
+                        <label class="form-check-label" for="chinese-meal"
+                          >Chinese</label
+                        >
+                      </div>
+
+                      <div class="form-check form-check-inline">
+                        <input
+                          type="checkbox"
+                          class="form-control form-check-input"
+                          id="mediterranean-meal"
+                          name="category"
+                          value="Mediterranean"
+                          th:field="*{category}"
+                        />
+                        <label class="form-check-label" for="mediterranean-meal"
+                          >Mediterranean</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row my-3">
+                    <div id="nutrition-error"></div>
+                    <label for="nutrition" class="col-sm-2 col-form-label"
+                      >Nutrition</label
+                    >
+                    <div class="col-sm-10 d-flex justify-content-between">
+                      <div class="col-sm-2">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="calorie"
+                          name="nutrition.calorie"
+                          placeholder="Calorie"
+                          required
+                          th:field="*{nutrition.calorie}"
+                        />
+                        <label for="calorie">calorie</label>
+                      </div>
+
+                      <div class="col-sm-2">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="carbohydrate"
+                          name="nutrition.carbohydrate"
+                          placeholder="carbohydrate"
+                          required
+                          th:field="*{nutrition.carbohydrate}"
+                        />
+                        <label for="carbohydrate">carbohydrate</label>
+                      </div>
+
+                      <div class="col-sm-2">
+                        <span
+                          th:if="${#fields.hasErrors('nutrition.protein')}"
+                          class="alert alert-error"
+                          th:errors="*{nutrition.protein}"
+                        ></span>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="protein"
+                          name="nutrition.protein"
+                          placeholder="protein"
+                          required
+                          th:field="*{nutrition.protein}"
+                        />
+                        <label for="protein">protein</label>
+                      </div>
+
+                      <div class="col-sm-2">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="fat"
+                          name="nutrition.fat"
+                          placeholder="fat"
+                          required
+                          th:field="*{nutrition.fat}"
+                        />
+                        <label for="fat">fat</label>
+                      </div>
+                      <span
+                        th:if="${#fields.hasErrors('nutrition')}"
+                        class="alert alert-error"
+                        th:errors="*{nutrition}"
+                      ></span>
+                    </div>
+                  </div>
+
+                  <div class="form-group row my-3">
+                    <div id="ingredients-error"></div>
+
+                    <label
+                      for="meal-ingredients"
+                      class="col-sm-2 col-form-label"
+                      >Ingredients</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="meal-ingredients"
+                        name="meal-ingredients"
+                        placeholder="Ingredients"
+                        required
+                        th:field="*{Ingredients}"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Modal Footer -->
+                  <div class="modal-footer d-flex justify-content-center">
+                    <button
+                      class="btn btn-secondary"
+                      id="addMealFormBtn"
+                      type="submit"
+                    >
+                      Submit <i class="fas fa-paper-plane-o ml-1"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Update Meal Modal -->
+    <div class="modal fade" id="updateMeal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title w-100 text-center">Update Meal</h4>
+          </div>
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <form id="updateMealForm">
+              <div class="container">
+                <div id="errorMessage-error"></div>
+                <div class="form-group row my-3">
+                  <div id="name-error"></div>
+                  <label for="meal-name" class="col-sm-2 col-form-label"
+                    >Name</label
+                  >
+                  <div class="col-sm-10">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="meal-name"
+                      name="meal-name"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row my-3">
+                  <div id="photo-error"></div>
+
+                  <label for="meal-photo" class="col-sm-2 col-form-label"
+                    >Photo</label
+                  >
+                  <div class="col-sm-10">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="meal-photo"
+                      name="meal-photo"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group row my-3">
+                  <div id="price-error"></div>
+
+                  <label for="meal-price" class="col-sm-2 col-form-label"
+                    >Price</label
+                  >
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <span class="input-group-text">$</span>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="meal-price"
+                        name="meal-price"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row my-3">
+                  <div id="category-error"></div>
+                  <label class="col-sm-2 col-form-label">Category</label>
+
+                  <div class="col-sm-10" name="meal-tags">
+                    <div class="form-check form-check-inline">
+                      <input
+                        type="checkbox"
+                        class="form-control form-check-input"
+                        id="vegan"
+                        name="category"
+                        value="Vegan"
+                      />
+                      <label class="form-check-label" for="vegan">Vegan</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input
+                        type="checkbox"
+                        class="form-control form-check-input"
+                        id="paleo"
+                        name="category"
+                        value="Paleo"
+                      />
+                      <label class="form-check-label" for="paleo">Paleo</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input
+                        type="checkbox"
+                        class="form-control form-check-input"
+                        id="keto"
+                        name="category"
+                        value="Keto"
+                      />
+                      <label class="form-check-label" for="keto">Keto</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input
+                        type="checkbox"
+                        class="form-control form-check-input"
+                        id="japanese-meal"
+                        name="category"
+                        value="Japanese"
+                      />
+                      <label class="form-check-label" for="japanese-meal"
+                        >Japanese</label
+                      >
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input
+                        type="checkbox"
+                        class="form-control form-check-input"
+                        id="chinese-meal"
+                        name="category"
+                        value="Chinese"
+                      />
+                      <label class="form-check-label" for="chinese-meal"
+                        >Chinese</label
+                      >
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input
+                        type="checkbox"
+                        class="form-control form-check-input"
+                        id="mediterranean-meal"
+                        name="category"
+                        value="Mediterranean"
+                      />
+                      <label class="form-check-label" for="mediterranean-meal"
+                        >Mediterranean</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row my-3">
+                  <div id="nutrition-error"></div>
+                  <label for="nutrition" class="col-sm-2 col-form-label"
+                    >Nutrition</label
+                  >
+                  <div class="col-sm-10 d-flex justify-content-between">
+                    <div class="col-sm-2">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="calorie"
+                        name="nutrition.calorie"
+                        required
+                      />
+                      <label for="calorie">calorie</label>
+                    </div>
+
+                    <div class="col-sm-2">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="carbohydrate"
+                        name="nutrition.carbohydrate"
+                        required
+                      />
+                      <label for="carbohydrate">carbohydrate</label>
+                    </div>
+
+                    <div class="col-sm-2">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="protein"
+                        name="nutrition.protein"
+                        required
+                      />
+                      <label for="protein">protein</label>
+                    </div>
+
+                    <div class="col-sm-2">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="fat"
+                        name="nutrition.fat"
+                        required
+                      />
+                      <label for="fat">fat</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row my-3">
+                  <div id="ingredients-error"></div>
+
+                  <label for="meal-ingredients" class="col-sm-2 col-form-label"
+                    >Ingredients</label
+                  >
+                  <div class="col-sm-10">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="meal-ingredients"
+                      name="meal-ingredients"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer d-flex justify-content-center">
+                  <button
+                    class="btn btn-secondary"
+                    id="updateMealFormBtn"
+                    type="submit"
+                  >
+                    Submit <i class="fas fa-paper-plane-o ml-1"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meal Card -->
+    <div class="meals mb-7">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div
+            class="col col-md-4"
+            th:each="meal : ${meals}"
+            th:if="${meal.category.contains(filter) || filter == null}"
+          >
+            <div
+              class="card mb-4 h-100"
+              th:data-id="${meal.id}"
+              th:data-meal="${meal}"
+            >
+              <div class="image-container">
+                <img
+                  th:src="@{${meal.photo}}"
+                  class="card-img-top"
+                  th:data-photo="${meal.photo}"
+                  alt="..."
+                />
+                <div
+                  class="meal-modification-wrapper row"
+                  th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"
+                >
+                  <div class="update-meal-card-wrapper col-md-4">
+                    <button
+                      type="submit"
+                      class="update-meal-info text-info btn"
+                      style="background: none; border: none; outline: none"
+                    >
+                      <i class="fa-solid fa-pen text-info" type="button submit"
+                        ><span class="ms-2 fw-bolder font-monospace text-info"
+                          >Update Meal</span
+                        ></i
+                      >
+                    </button>
+                  </div>
+                  <div class="remove-meal-card-wrapper col-md-5">
+                    <button
+                      type="submit"
+                      class="remove-meal-card text-danger btn"
+                      style="background: none; border: none; outline: none"
+                    >
+                      <i class="fa-solid fa-minus">
+                        <span class="ms-2 font-monospace text-danger fw-bolder"
+                          >Remove Meal</span
+                        >
+                      </i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title" th:text="${meal.name}"></h5>
+                <div class="ingredients my-2 fixed-height">
+                  <p class="card-text" th:text="${meal.ingredients}"></p>
+                </div>
+                <div
+                  class="nutrition-details d-flex justify-content-around text-muted mt-3"
+                >
+                  <span
+                    class="nutrition-detail ms-2"
+                    id="calorie"
+                    th:text="${meal.nutrition.calorie}"
+                  ></span>
+                  Cal
+                  <span
+                    class="nutrition-detail ms-2"
+                    id="carbohydrate"
+                    th:text="${meal.nutrition.carbohydrate}"
+                  ></span>
+                  g Carbohydrate
+                  <span
+                    class="nutrition-detail ms-2"
+                    id="protein"
+                    th:text="${meal.nutrition.protein}"
+                  ></span
+                  >g Protein
+                  <span
+                    class="nutrition-detail ms-2"
+                    id="fat"
+                    th:text="${meal.nutrition.fat}"
+                  ></span
+                  >g Fat
+                </div>
+                <p class="card-text">
+                  <span class="fw-semibold text-secondary">
+                    <i class="fas fa-utensils mr-2 fa-2"> </i>
+                    <span
+                      class="meal-category"
+                      th:text="${#strings.arrayJoin(meal.category, ', ')}"
+                    ></span>
+                  </span>
+                </p>
+                <div class="row align-items-center text-center g-0">
+                  <div class="col-4">
+                    <h5 class="meal-price" th:text="'$' + ${meal.price}"></h5>
+                  </div>
+                  <div class="col-8">
+                    <form th:action="@{/add-to-cart}" method="post">
+                      <input
+                        type="hidden"
+                        th:value="${meal.id}"
+                        name="mealId"
+                      />
+                      <button
+                        class="btn btn-secondary w-100 p-3 rounded-0"
+                        type="submit"
+                      >
+                        ADD TO CART
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <footer th:replace="~{fragments :: footer}"></footer>
+
+    <button id="to-top" class="to-top-btn">
+      <img
+        src="../static/images/up-arrow.png"
+        th:src="@{images/up-arrow.png}"
+        alt=""
+      />
+    </button>
+
+    <script
+      th:src="@{/js/bootstrap.bundle.min.js}"
+      src="../static/js/bootstrap.bundle.min.js"
+    ></script>
+    <script th:src="@{/js/script.js}" src="../static/js/script.js"></script>
+  </body>
+</html>

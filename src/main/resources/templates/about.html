@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      th:href="@{https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap}"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css}"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/css/bootstrap.css}"
+      href="../static/css/bootstrap.css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/css/styles.css}"
+      href="../static/css/styles.css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/images/favicon.png}"
+      href="../static/images/favicon.png"
+      rel="icon"
+    />
+    <title>About</title>
+  </head>
+
+  <body class="about-page">
+    <!-- nav bar -->
+    <nav th:replace="~{fragments :: nav-bar}"></nav>
+    <!-- Header -->
+    <header class="bg-light py-6">
+      <div class="container">
+        <h1>About Us</h1>
+      </div>
+    </header>
+
+    <!-- Image -->
+    <section>
+      <div>
+        <img
+          src="../static/images/about-large.png"
+          th:src="@{images/about-large.png}"
+          alt=""
+          class="w-100 my-6"
+        />
+      </div>
+    </section>
+
+    <!-- Basic Text -->
+    <section class="pt-4 mb-6">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 offset-lg-1">
+            <h4 class="mb-4">Our Culinary Journey</h4>
+            <p mb-4>
+              Welcome to Sage Cuisine, where culinary passion meets exquisite
+              flavors. We are dedicated to bringing you on a delightful
+              gastronomic journey, offering a diverse range of delicacies from
+              around the world. At Sage Cuisine, we believe that cooking is an
+              art, and every dish we prepare is a masterpiece crafted with love
+              and creativity. Our chefs, inspired by global traditions and local
+              ingredients, curate dishes that tantalize your taste buds and
+              elevate your dining experience. Whether you crave the spicy aromas
+              of Asian cuisine, the rich textures of European classics, or the
+              vibrant spices of Middle Eastern fare, we have a delectable spread
+              waiting just for you. Beyond the flavors, Sage Cuisine is a
+              community of food enthusiasts, where we share recipes, cooking
+              tips, and stories that celebrate the joy of cooking and savoring
+              good food. Join us in this culinary adventure, and let Sage
+              Cuisine be your trusted companion in your exploration of
+              delightful and exotic meals. Come, indulge your senses, and
+              discover the world on a plate with Sage Cuisine. Bon appétit!<br />
+              Embark on a gastronomic adventure with Sage Cuisine, where we
+              blend passion and expertise to create a symphony of flavors. Our
+              culinary journey is a tribute to the world's diverse cuisines,
+              offering you a delightful exploration of delicacies from every
+              corner of the globe. With a team of skilled chefs deeply rooted in
+              tradition yet inspired by innovation, we craft dishes that not
+              only satiate your hunger but also ignite your taste buds.
+            </p>
+
+            <h4 class="mt-6 mb-4">Exquisite Flavors, Global Influences</h4>
+            <p class="mb-4">
+              At Sage Cuisine, we believe in the magic of flavors. Our kitchen
+              is a canvas, and the ingredients are our colors. From the vibrant
+              spices of India to the subtle elegance of French cuisine, each
+              dish is a masterpiece, thoughtfully prepared to tantalize your
+              senses. We source the finest, freshest ingredients, ensuring that
+              every bite is a celebration of taste and authenticity. Let our
+              diverse menu take you on a journey of exquisite flavors, guided by
+              the expertise of our chefs and the love we infuse into every
+              recipe.
+            </p>
+            <h4 class="mt-6 mb-4">A Community of Food Enthusiasts</h4>
+            <p class="mb-4">
+              Beyond being a culinary destination, Sage Cuisine is a vibrant
+              community of food enthusiasts. Here, we share more than just
+              recipes; we share stories, traditions, and the joy of cooking.
+              Join us in our virtual kitchen, where seasoned chefs and
+              passionate home cooks come together to exchange ideas and
+              celebrate the art of food. Whether you're a seasoned epicurean or
+              an aspiring home chef, Sage Cuisine welcomes you to a world where
+              the love for food unites us all. Come, be a part of our culinary
+              family, and let's explore the endless possibilities of taste
+              together.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer th:replace="~{fragments :: footer}"></footer>
+
+    <button id="to-top" class="to-top-btn">
+      <img
+        src="../static/images/up-arrow.png"
+        th:src="@{images/up-arrow.png}"
+        alt=""
+      />
+    </button>
+
+    <script
+      th:src="@{/js/bootstrap.bundle.min.js}"
+      src="../static/js/bootstrap.bundle.min.js"
+    ></script>
+    <script th:src="@{/js/script.js}" src="../static/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      th:href="@{https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap}"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css}"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/css/bootstrap.css}"
+      href="../static/css/bootstrap.css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/css/styles.css}"
+      href="../static/css/styles.css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/images/favicon.png}"
+      href="../static/images/favicon.png"
+      rel="icon"
+    />
+    <title>Sage Cuisine</title>
+  </head>
+  <body class="home-page">
+    <!-- nav bar -->
+    <nav th:replace="~{fragments :: nav-bar}"></nav>
+
+    <!-- Header -->
+    <header class="header position-relative mt-6 overflow-hidden">
+      <div class="container position-relative z-3">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="mt-6">
+              <h1 class="xl-text">
+                The <span class="text-secondary">Perfect</span> Meal Prep
+              </h1>
+              <p class="lead mb-4">
+                Discover the world's flavors at Sage Cuisine. Exquisite, exotic,
+                and always exceptional.
+              </p>
+
+              <a
+                th:if="${!#authorization.expression('isAuthenticated()')}"
+                href="sign-up.html"
+                th:href="@{/sign-up}"
+                class="btn btn-outline-secondary btn-lg m-2"
+              >
+                Sign Up
+              </a>
+              <a
+                href="about.html"
+                th:href="@{/about}"
+                class="btn btn-primary btn-lg m-2"
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="image-container">
+              <img
+                src="../static/images/background.gif"
+                th:src="@{/images/background.gif}"
+                alt=""
+                class="img-fluid"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Stats -->
+    <section id="stats" class="stats container">
+      <div class="row my-6">
+        <div class="col-md-3 col-sm-6 text-center">
+          <h2 class="counter xl-text" data-target="328"></h2>
+          <p>Happy Customers</p>
+        </div>
+
+        <div class="col-md-3 col-sm-6 text-center">
+          <h2 class="counter xl-text" data-target="120"></h2>
+          <p>Meal Varieties</p>
+        </div>
+
+        <div class="col-md-3 col-sm-6 text-center">
+          <h2 class="counter xl-text" data-target="159"></h2>
+          <p>Good Reviews</p>
+        </div>
+
+        <div class="col-md-3 col-sm-6 text-center">
+          <h2 class="counter xl-text" data-target="50"></h2>
+          <p>Michelin-Starred Chefs</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Introduction -->
+    <section id="introduction" class="intro bg-light py-6">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2 text-center">
+            <h2>
+              Crafting <span class="text-secondary">Delectable </span> Culinary
+              Inspirations
+            </h2>
+            <p class="fs-5">
+              Sage Cuisine is more than just a culinary hub—it's where
+              creativity meets expertise. We specialize in curating diverse and
+              exquisite cuisines from around the world, offering a blend of
+              traditional mastery and innovative flavors. Whether you're
+              exploring gourmet meals, engaging cooking classes, or a vibrant
+              food community, Sage Cuisine is your destination. Come experience
+              the art of flavor, passionately crafted to inspire your culinary
+              journey.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What kinds of service we have -->
+    <section
+      id="details"
+      class="details position-relative my-6 overflow-hidden"
+    >
+      <div class="container position-relative z-3">
+        <div class="row">
+          <div class="col-lg-6 p-0">
+            <div class="image-container d-flex mt-4 me-2">
+              <img
+                src="../static/images/elevate-meal-prep-experience.gif"
+                th:src="@{images/elevate-meal-prep-experience.gif}"
+                alt=""
+                class="img-fluid"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mt-4 ms-6">
+              <h2 class="mb-5">
+                Elevate Your
+                <span class="text-secondary"> Culinary Experience</span>
+              </h2>
+              <ul class="list-unstyled mt-6">
+                <li class="d-flex mb-3">
+                  <i class="fas fa-check text-primary fa-2x mx-4"></i>
+                  <p>
+                    Delight in a culinary journey around the world, savoring
+                    authentic flavors meticulously prepared by our skilled
+                    chefs.
+                  </p>
+                </li>
+                <li class="d-flex mb-3">
+                  <i class="fas fa-check text-primary fa-2x mx-4"></i>
+                  <p>
+                    Engage in hands-on cooking experiences led by passionate
+                    culinary experts, where you learn the art and techniques of
+                    various cuisines.
+                  </p>
+                </li>
+                <li class="d-flex mb-3">
+                  <i class="fas fa-check text-primary fa-2x mx-4"></i>
+                  <p>
+                    Enjoy personalized meal plans tailored to your dietary
+                    preferences and health goals. Our chefs create nutritious
+                    and delicious meals just for you.
+                  </p>
+                </li>
+                <li class="d-flex mb-3">
+                  <i class="fas fa-check text-primary fa-2x mx-4"></i>
+                  <p>
+                    Benefit from expert advice on ingredients, cooking
+                    techniques, and flavor pairing, empowering you to experiment
+                    and create your signature dishes.
+                  </p>
+                </li>
+              </ul>
+              <a
+                href="#"
+                class="btn btn-secondary d-flex justify-content-center mt-5"
+                >Get Started</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Meals that we offer -->
+    <section id="meals" class="meals bg-light py-6">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5">
+            <div class="text-container text-center text-lg-start">
+              <h2><span class="text-secondary">Meals</span> that we offer</h2>
+              <p>
+                At Sage Cuisine, we offer a diverse array of culinary delights
+                meticulously crafted to cater to all your gastronomic desires.
+                Just as we meticulously prepare each dish, we extend the same
+                level of expertise and attention to detail to enhance your
+                office ambiance. <br />
+                <br />With our culinary finesse and dedication to perfection, we
+                transform your workplace, infusing it with flavors of creativity
+                and productivity. Every element of your office space is
+                thoughtfully curated and executed, mirroring the precision and
+                passion we put into our culinary creations.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <div class="row mb-4">
+              <i class=""></i>
+              <div
+                class="col-md-4 d-flex flex-column align-items-center text-center"
+              >
+                <!-- <i class="fa-solid fa-leaf fa-4x text-secondary mb-2"></i> -->
+                <img
+                  class="img-fluid col-md-7"
+                  src="../static/images/home-vegan-food.png"
+                  th:src="@{images/home-vegan-food.png}"
+                  alt=""
+                />
+                <p class="fs-5 fw-bold">Vegan</p>
+              </div>
+              <div
+                class="col-md-4 d-flex flex-column align-items-center text-center"
+              >
+                <img
+                  class="img-fluid col-md-7"
+                  src="../static/images/home-paleo-food.png"
+                  th:src="@{images/home-paleo-food.png}"
+                  alt=""
+                />
+                <p class="fs-5 fw-bold">Paleo</p>
+              </div>
+              <div
+                class="col-md-4 d-flex flex-column align-items-center text-center"
+              >
+                <img
+                  class="img-fluid col-md-7"
+                  src="../static/images/home-keto-food.png"
+                  th:src="@{images/home-keto-food.png}"
+                  alt=""
+                />
+                <p class="fs-5 fw-bold">Keto</p>
+              </div>
+            </div>
+            <div class="row">
+              <div
+                class="col-md-4 d-flex flex-column align-items-center text-center"
+              >
+                <img
+                  class="img-fluid col-md-7"
+                  src="../static/images/home-mediterranean-food.png"
+                  th:src="@{images/home-mediterranean-food.png}"
+                  alt=""
+                />
+                <p class="fs-5 fw-bold">Mediterranean</p>
+              </div>
+              <div
+                class="col-md-4 d-flex flex-column align-items-center text-center"
+              >
+                <img
+                  class="img-fluid col-md-7"
+                  src="../static/images/home-chinese-food.png"
+                  th:src="@{images/home-chinese-food.png}"
+                  alt=""
+                />
+                <p class="fs-5 fw-bold">Chinese</p>
+              </div>
+              <div
+                class="col-md-4 d-flex flex-column align-items-center text-center"
+              >
+                <img
+                  class="img-fluid col-md-7"
+                  src="../static/images/home-japanese-food.png"
+                  th:src="@{images/home-japanese-food.png}"
+                  alt=""
+                />
+                <p class="fs-5 fw-bold">Japanese</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Learn More about Meal Prep -->
+    <section
+      class="learn-meal-prep details-2 position-relative my-6 overflow-hidden d-flex justify-content-center"
+    >
+      <div class="row container d-flex flex-column align-content-center mt-8">
+        <div class="col-md-6">
+          <h2 class="text-center text-light">Learn Meal Prep Tips</h2>
+        </div>
+        <div class="col-md-6 d-flex justify-content-center">
+          <i
+            id="play-video"
+            class="fa-regular fa-circle-play d-inline w-25 fa-4x text-light ms-5"
+            data-bs-toggle="modal"
+            data-src="https://www.youtube-nocookie.com/embed/lCldQpmCVPc?si=43Z1x4EPeZBXhdD-"
+            data-bs-target="#meal-prep-tips-video"
+          ></i>
+        </div>
+      </div>
+
+      <!-- Modal Container -->
+      <div class="video">
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="meal-prep-tips-video"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+                <!-- 16:9 aspect ratio -->
+                <div class="ratio ratio-16x9"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing-->
+    <section id="pricing" class="projects py-6">
+      <div class="container">
+        <h2 class="text-center mb-6">Pricing</h2>
+        <div class="meal-plans row mb-4 gx-7">
+          <!-- Basic Plan -->
+          <div class="col-md-4">
+            <div class="pricing-item">
+              <div class="pricing-header">
+                <h3 class="pricing-title">BASIC PLAN</h3>
+              </div>
+              <div class="pricing-body">
+                <div class="price-wrapper">
+                  <span class="currency">$</span>
+                  <span class="price">200</span>
+                  <span class="period">/Month</span>
+                </div>
+                <ul class="list">
+                  <li class="active">
+                    Weekly meal plans: Provide members with a weekly set of meal
+                    plans.
+                  </li>
+                  <li class="active">Access to a limited recipe library.</li>
+                  <li class="active">Email support for basic inquiries.</li>
+                  <li class="active">Standard ingredient lists.</li>
+                  <li class="active">Cost-effective pricing.</li>
+                  <li>Detailed Nutrition information for recipes.</li>
+                  <li>
+                    Exclusive discounts on selected ingredients or products from
+                    partners
+                  </li>
+                  <li>Moderate pricing.</li>
+                </ul>
+              </div>
+              <div class="pricing-footer">
+                <a href="#" class="btn-primary-line">Select Plan</a>
+              </div>
+            </div>
+          </div>
+          <!-- Premium Plan -->
+          <div class="col-md-4">
+            <div class="pricing-item active">
+              <div class="pricing-header">
+                <h3 class="pricing-title">Premium Plan</h3>
+              </div>
+              <div class="pricing-body">
+                <div class="price-wrapper">
+                  <span class="currency">$</span>
+                  <span class="price">300</span>
+                  <span class="period">/Month</span>
+                </div>
+                <ul class="list">
+                  <li class="active">
+                    Tailored meal plans based on individual preferences
+                  </li>
+                  <li class="active">Expanded recipe library.</li>
+                  <li class="active">
+                    Accessible local locations for ingredients
+                  </li>
+                  <li class="active">Nutrition information for recipes.</li>
+                  <li class="active">
+                    Exclusive discounts on selected ingredients or products from
+                    partners.
+                  </li>
+                  <li class="active">Moderate pricing.</li>
+                  <li>24x7 Great Support</li>
+                  <li>Monthly Health Reports and Analytics</li>
+                </ul>
+              </div>
+              <div class="pricing-footer">
+                <a href="#" class="btn-primary-line">Select Plan</a>
+              </div>
+            </div>
+          </div>
+          <!-- Platinum Plan -->
+          <div class="col-md-4">
+            <div class="pricing-item">
+              <div class="pricing-header">
+                <h3 class="pricing-title">Platinum Plan</h3>
+              </div>
+              <div class="pricing-body">
+                <div class="price-wrapper">
+                  <span class="currency">$</span>
+                  <span class="price">500</span>
+                  <span class="period">/Month</span>
+                </div>
+                <ul class="list">
+                  <li class="active">Calculated meal plan by nutritionist.</li>
+                  <li class="active">Extensive recipe library.</li>
+                  <li class="active">Exclusive tooling for health.</li>
+                  <li class="active">
+                    Access to our chef forum for tips and recipes.
+                  </li>
+                  <li class="active">
+                    Nutrition tracking and recommendations.
+                  </li>
+                  <li class="active">
+                    Exclusive cooking classes or workshops.
+                  </li>
+                  <li class="active">
+                    Premium pricing for long-term commitments.
+                  </li>
+                  <li class="active">Premium all-in-one packages.</li>
+                </ul>
+              </div>
+              <div class="pricing-footer">
+                <a href="#" class="btn-primary-line">Select Plan</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="compare-plans mt-5">
+          <h2 class="text-center mb-5">Compare Plans</h2>
+          <table class="table table-striped gx-4">
+            <thead>
+              <tr>
+                <th scope="col">Plan</th>
+                <th scope="col">Price</th>
+                <th scope="col">Customization</th>
+                <th scope="col">Nutritional recommendations</th>
+                <th class="col">Discount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Basic</th>
+                <td>$200</td>
+                <td>No</td>
+                <td>No</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <th scope="row">Premium</th>
+                <td>$300</td>
+                <td>Yes</td>
+                <td>No</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <th scope="row">Platinum</th>
+                <td>$500</td>
+                <td>Yes</td>
+                <td>Yes</td>
+                <td>Yes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Good Reviews -->
+    <section id="reviews" class="reviews bg-light py-6">
+      <div id="reviewCarousel" class="carousel slide">
+        <h2 class="text-center mb-5">Read what others have said about us</h2>
+        <div class="carousel-inner">
+          <!-- Slide 1 -->
+          <div class="carousel-item active">
+            <div
+              class="d-flex flex-column justify-content-center align-items-center text-center"
+            >
+              <img
+                src="../static/images/user-1.jpg"
+                th:src="@{images/user-1.jpg}"
+                alt=""
+                class="rounded-circle"
+                width="120"
+              />
+              <span class="heading fw-bold fs-5 mt-4 mb-2">Marlene</span>
+              <div class="review-stars mb-3">
+                <i class="fas fa-star fa-2x"></i>
+                <i class="fas fa-star fa-2x"></i>
+                <i class="fas fa-star fa-2x"></i>
+                <i class="fas fa-star fa-2x"></i>
+                <i class="fas fa-star fa-2x"></i>
+              </div>
+              <p class="border-bottom">4.9 average based on 196 reviews.</p>
+              <p class="w-50 my-4 fst-italic fs-4 mb-4">
+                "Sage Cuisine is a culinary gem! The diverse menu caters to
+                every palate, from exotic delicacies to comforting classics. The
+                flavors are vibrant, the presentation is artful, and the service
+                is impeccable. Every meal feels like a celebration of taste. I
+                highly recommend Sage Cuisine for a delightful and memorable
+                dining experience!"
+              </p>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="carousel-item">
+            <div
+              class="d-flex flex-column justify-content-center align-items-center text-center"
+            >
+              <img
+                src="../static/images/user-2.jpg"
+                th:src="@{images/user-2.jpg}"
+                alt=""
+                class="rounded-circle"
+                width="120"
+              />
+              <span class="heading fw-bold fs-5 mt-4 mb-2">John</span>
+              <div class="review-stars mb-3">
+                <i class="fas fa-star fa-2x"></i>
+                <i class="fas fa-star fa-2x"></i>
+                <i class="fas fa-star fa-2x"></i>
+                <i class="fas fa-star fa-2x"></i>
+                <i class="fas fa-star fa-2x"></i>
+              </div>
+              <p class="border-bottom">4.9 average based on 196 reviews.</p>
+              <p class="w-50 my-4 fst-italic fs-4 mb-4">
+                "Exceptional culinary expertise at Sage Cuisine! The dishes are
+                not only delicious but also crafted with creativity and
+                precision. The staff is incredibly friendly and attentive,
+                making every visit a pleasure. Whether you're a fan of exotic
+                cuisine or classic favorites, Sage Cuisine delivers an
+                unforgettable gastronomic journey. A must-visit for food
+                enthusiasts!"
+              </p>
+            </div>
+          </div>
+          <!-- Slide 1 -->
+          <div class="carousel-item">
+            <div
+              class="d-flex flex-column justify-content-center align-items-center text-center"
+            >
+              <img
+                src="../static/images/user-3.jpg"
+                th:src="@{images/user-3.jpg}"
+                alt=""
+                class="rounded-circle"
+                width="120"
+              />
+              <span class="heading fw-bold fs-5 mt-4 mb-2">Stella</span>
+              <div class="review-stars mb-3">
+                <i class="fas fa-star fa-2x"></i>
+                <i class="fas fa-star fa-2x"></i>
+                <i class="fas fa-star fa-2x"></i>
+                <i class="fas fa-star fa-2x"></i>
+                <i class="fas fa-star fa-2x"></i>
+              </div>
+              <p class="border-bottom">4.9 average based on 196 reviews.</p>
+              <p class="w-50 my-4 fst-italic fs-4 mb-4">
+                "Sage Cuisine exceeded all my expectations! The menu is a
+                delightful fusion of flavors, and each dish tells a story of
+                culinary mastery. The ambiance is warm and inviting, perfect for
+                intimate dinners or special occasions. The chefs and staff are
+                passionate about their craft, evident in every bite. If you
+                appreciate exceptional food and top-notch service, Sage Cuisine
+                is the place to be. A true culinary delight!"
+              </p>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#reviewCarousel"
+          data-bs-slide="prev"
+        >
+          <i class="fas fa-arrow-circle-left fa-3x text-secondary"></i>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#reviewCarousel"
+          data-bs-slide="next"
+        >
+          <i class="fas fa-arrow-circle-right fa-3x text-secondary"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- Write your review form -->
+    <section id="write-reviews" class="write-reviews my-6 position-relative">
+      <div class="container position-relative z-3">
+        <div class="row">
+          <div class="col-lg-6 d-none d-md-block">
+            <div class="image-container">
+              <img
+                src="../static/images/review-kitchen.gif"
+                th:src="@{images/review-kitchen.gif}"
+                alt=""
+                class="img-fluid"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="text-container">
+              <h2>Write Your Review</h2>
+              <div id="rating" class="star-wrapper mb-3">
+                <i data-id="1" class="fa-regular fa-star fa-2x"></i>
+                <i data-id="2" class="fa-regular fa-star fa-2x"></i>
+                <i data-id="3" class="fa-regular fa-star fa-2x"></i>
+                <i data-id="4" class="fa-regular fa-star fa-2x"></i>
+                <i data-id="5" class="fa-regular fa-star fa-2x"></i>
+              </div>
+              <form class="customer-review">
+                <div class="my-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter name"
+                  />
+                </div>
+                <div class="mb-3">
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="Enter email"
+                    pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter city"
+                    minlength="2"
+                    maxlength="10"
+                  />
+                </div>
+                <div class="mb-3">
+                  <textarea
+                    class="form-control"
+                    placeholder="Your Review"
+                    rows="8"
+                    minlength="20"
+                    maxlength="225"
+                    required
+                  ></textarea>
+                </div>
+                <div class="d-grid gap-2 mb-3">
+                  <input
+                    type="submit"
+                    value="Submit"
+                    class="btn btn-secondary btn-block"
+                  />
+                </div>
+                <span id="submitInfo" class="help-block">
+                  By clicking <strong>Submit</strong>, I authorize the sharing
+                  of my name and review on the web. (email will not be shared)
+                </span>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer th:replace="~{fragments :: footer}"></footer>
+
+    <button id="to-top" class="to-top-btn">
+      <img
+        src="../static/images/up-arrow.png"
+        th:src="@{images/up-arrow.png}"
+        alt=""
+      />
+    </button>
+
+    <script
+      th:src="@{/js/bootstrap.bundle.min.js}"
+      src="../static/js/bootstrap.bundle.min.js"
+    ></script>
+    <script th:src="@{/js/script.js}" src="../static/js/script.js"></script>
+  </body>
+</html>
